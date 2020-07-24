@@ -5000,7 +5000,7 @@ class ComputeManager(manager.SchedulerDependentManager):
 
     @aggregate_object_compat
     @wrap_exception()
-    def add_aggregate_host(self, context, host, slave_info=None,
+    def add_aggregate_host(self, context, host, subordinate_info=None,
                            aggregate=None, aggregate_id=None):
         """Notify hypervisor of change (for hypervisor pools)."""
         if not aggregate:
@@ -5008,7 +5008,7 @@ class ComputeManager(manager.SchedulerDependentManager):
 
         try:
             self.driver.add_to_aggregate(context, aggregate, host,
-                                         slave_info=slave_info)
+                                         subordinate_info=subordinate_info)
         except NotImplementedError:
             LOG.debug(_('Hypervisor driver does not support '
                         'add_aggregate_host'))
@@ -5021,7 +5021,7 @@ class ComputeManager(manager.SchedulerDependentManager):
 
     @aggregate_object_compat
     @wrap_exception()
-    def remove_aggregate_host(self, context, host, slave_info=None,
+    def remove_aggregate_host(self, context, host, subordinate_info=None,
                               aggregate=None, aggregate_id=None):
         """Removes a host from a physical hypervisor pool."""
         if not aggregate:
@@ -5029,7 +5029,7 @@ class ComputeManager(manager.SchedulerDependentManager):
 
         try:
             self.driver.remove_from_aggregate(context, aggregate, host,
-                                              slave_info=slave_info)
+                                              subordinate_info=subordinate_info)
         except NotImplementedError:
             LOG.debug(_('Hypervisor driver does not support '
                         'remove_aggregate_host'))
